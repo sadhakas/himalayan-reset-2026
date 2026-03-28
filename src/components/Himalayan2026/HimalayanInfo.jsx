@@ -30,9 +30,13 @@ export default function HimalayanInfo() {
             <div className="w-2 h-2 rounded-full bg-sky-200 -ml-[21px]"></div>
             <span><strong className="text-white">Devprayag</strong></span>
           </li>
+          <li className="flex items-center gap-3 border-l-2 border-white/20 ml-1 pl-4 pb-2">
+            <div className="w-2 h-2 rounded-full bg-sky-200 -ml-[21px]"></div>
+            <span><strong className="text-white">Badrinath</strong></span>
+          </li>
           <li className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-white ml-1"></div>
-            <span><strong className="text-white">Badrinath</strong> — End 24th Aft</span>
+            <span><strong className="text-white">Rishikesh</strong> — End 24th Aft</span>
           </li>
         </ul>
       </div>
