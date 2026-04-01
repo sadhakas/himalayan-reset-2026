@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+// --- THE KILL SWITCH ---
+// Change this to `false` when you want to stop accepting submissions!
+const IS_FORM_OPEN = true; 
+
 export default function HimalayanForm() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', query: '' });
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
@@ -44,7 +48,24 @@ export default function HimalayanForm() {
     }
   };
 
-  // 1. SUCCESS STATE UI (This replaces the form completely when successful)
+  // 1. CLOSED STATE UI (Overrides everything if the kill switch is flipped)
+  if (!IS_FORM_OPEN) {
+    return (
+      <div className="bg-slate-900/60 backdrop-blur-xl rounded-3xl p-8 border border-white/10 text-center shadow-2xl transition-all duration-500">
+        <div className="w-16 h-16 bg-white/5 text-slate-300 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+        </div>
+        <h3 className="text-2xl font-bold text-white mb-2">Waitlist Closed</h3>
+        <p className="text-sky-200">
+          Thank you for the incredible response! We are no longer accepting new entries for the Himalayan Reset at this time.
+        </p>
+      </div>
+    );
+  }
+
+  // 2. SUCCESS STATE UI (This replaces the form completely when successful)
   if (status === 'success') {
     return (
       <div className="bg-sky-900/40 backdrop-blur-xl rounded-3xl p-8 border border-sky-400/30 text-center shadow-2xl transition-all duration-500">
@@ -59,7 +80,7 @@ export default function HimalayanForm() {
     );
   }
 
-  // 2. DEFAULT & ERROR STATE UI
+  // 3. DEFAULT & ERROR STATE UI
   return (
     <div className="bg-[#0f172a]/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl relative z-10">
       <h3 className="text-2xl font-bold text-white mb-6">Register Interest</h3>
